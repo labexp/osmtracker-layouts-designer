@@ -19,10 +19,15 @@
 
     <!-- Preparation popup-->
     <string name="preparing_pop_up_title">Preparing layout</string>
+    <string name="default_buttons_text">Default buttons (optional)</string>
     <string name="default_button_camera">Camera</string>
     <string name="default_button_voice">Voice record</string>
     <string name="default_button_text_note">Text note</string>
     <string name="snackbar_permission_request_denied_action">Settings</string>
+    <string name="columns">Columns</string>
+    <string name="rows">Rows</string>
+    <string name="hint_layout_name">Name</string>
+    <string name="layout_name_text">Layout name</string>
 
     <!--Permissions requested-->
     <string name="permission_request_dialog_tittle">Permission Required</string>

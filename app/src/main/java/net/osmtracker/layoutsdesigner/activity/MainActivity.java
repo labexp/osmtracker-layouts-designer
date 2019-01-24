@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.PointerIcon;
@@ -29,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -76,28 +78,7 @@ public class MainActivity extends AppCompatActivity
             @SuppressLint("ServiceCast")
             @Override
             public void onClick(View view){
-                LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupLayout = inflater.inflate(R.layout.preparation_popup, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
-
-                //TODO: CHANGE STRINGS
-                builder.setTitle(R.string.preparing_pop_up_title)
-                        .setView(popupLayout)
-                        .setPositiveButton("accept", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //TODO: OPEN EDITOR
-                                Log.i("#", "TODO: OPEN EDITOR");
-                            }
-                        })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        })
-                        .setCancelable(true)
-                        .create().show();
+                showPopup();
             }
         });
 
@@ -165,6 +146,79 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void showPopup(){
+
+        LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupLayout = inflater.inflate(R.layout.preparation_popup, null);
+
+        setSpinners(popupLayout);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+        builder.setTitle(R.string.preparing_pop_up_title)
+                .setView(popupLayout)
+                .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //TODO: OPEN EDITOR
+                        Log.i("#", "TODO: OPEN EDITOR");
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                })
+                .setCancelable(true)
+                .create().show();
+    }
+
+    public void setSpinners(View v){
+
+        AppCompatSpinner columnsSpinner = (AppCompatSpinner) v.findViewById(R.id.spinner_columns);
+        final String[] columnsCounter = {"1","2","3"};
+
+        ArrayAdapter adapterColumns = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, columnsCounter);
+        adapterColumns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        columnsSpinner.setAdapter(adapterColumns);
+
+        columnsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String numberColumns = columnsCounter[i];
+                Log.i("#", "Selección columnas: "+ numberColumns);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+        AppCompatSpinner rowsSpinner = (AppCompatSpinner) v.findViewById(R.id.spinner_rows);
+        final String[] rowsCounter = {"1","2","3","4"};
+        ArrayAdapter adapterRows = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, rowsCounter);
+        adapterColumns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        rowsSpinner.setAdapter(adapterRows);
+
+        rowsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String numberRows = rowsCounter[i];
+                Log.i("#", "Selección filas: "+ numberRows);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -230,11 +284,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void ShowPopup(View v){
-        preparationPopup.setContentView(R.layout.preparation_popup);
-        preparationPopup.show();
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -276,6 +325,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_btn_action_home) {
             // Handle the camera action
         } else if (id == R.id.nav_btn_action_editor) {
+            showPopup();
 
         } else if (id == R.id.nav_btn_action_settings) {
 

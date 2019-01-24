@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/textView2"
@@ -18,7 +19,7 @@
         android:layout_marginRight="8dp"
         android:layout_weight="30"
         android:gravity="center"
-        android:text="Layout name"
+        android:text="@string/layout_name_text"
         android:textColor="@color/textColor"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/layout_name"
@@ -37,7 +38,7 @@
         android:layout_marginRight="24dp"
         android:layout_weight="30"
         android:gravity="center"
-        android:hint="name"
+        android:hint="@string/hint_layout_name"
         android:textColor="@color/textColor"
         android:textColorHint="@color/colorHintText"
         android:textSize="15sp"
@@ -46,10 +47,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/rows"
-        android:layout_width="0dp"
+        android:id="@+id/spinner_rows"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="70"
@@ -57,7 +58,7 @@
         android:textColor="@color/textColor"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.765"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -65,29 +66,33 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="100"
         android:gravity="center"
-        android:text="Rows"
+        android:text="@string/rows"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toStartOf="@+id/rows"
-        app:layout_constraintStart_toEndOf="@+id/columns"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_rows"
+        app:layout_constraintStart_toEndOf="@+id/spinner_columns"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="100"
         android:gravity="center"
-        android:text="Columns"
+        android:text="@string/columns"
         android:textColor="@color/textColor"
-        app:layout_constraintEnd_toStartOf="@+id/columns"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_columns"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -126,8 +131,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/text_note"
         app:layout_constraintStart_toEndOf="@+id/camera"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <CheckBox
         android:id="@+id/camera"
@@ -149,12 +153,12 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/columns"
-        android:layout_width="0dp"
+        android:id="@+id/spinner_columns"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="70"
         android:gravity="center"
         android:textColor="@color/textColor"
@@ -165,14 +169,14 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
-        android:text="Default buttons (optional)"
+        android:text="@string/default_buttons_text"
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="15sp"
