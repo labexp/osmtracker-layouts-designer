@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity
         final String[] columnsCounter = {"1","2","3"};
 
         ArrayAdapter adapterColumns = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, columnsCounter);
+                R.layout.spinner_item, columnsCounter);
         adapterColumns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         columnsSpinner.setAdapter(adapterColumns);
 
@@ -201,9 +201,9 @@ public class MainActivity extends AppCompatActivity
         AppCompatSpinner rowsSpinner = (AppCompatSpinner) v.findViewById(R.id.spinner_rows);
         final String[] rowsCounter = {"1","2","3","4"};
         ArrayAdapter adapterRows = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, rowsCounter);
-        adapterColumns.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        rowsSpinner.setAdapter(adapterRows);
+                R.layout.spinner_item, rowsCounter);
+        adapterRows.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        rowsSpinner.setAdapter(adapterColumns);
 
         rowsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
