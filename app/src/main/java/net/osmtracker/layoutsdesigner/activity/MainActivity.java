@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     //This mehtod is used to initialize the first elements in the screen
     private void setUpElemets(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab_create_new_layout);
         fab.setOnClickListener(new View.OnClickListener() {
