@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="match_parent"
+    android:padding="7dp"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preparing layout"
+            android:textColor="@color/textColor"
+            android:textSize="25dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Layout name"
+            android:textSize="15dp"
+            android:textColor="@color/textColor"
+            android:layout_weight="30"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/layout_name"
+            android:layout_width="0dip"
+            android:textSize="15dp"
+            android:layout_height="match_parent"
+            android:textColor="@color/textColor"
+            android:hint="name"
+            android:textColorHint="@color/colorPrimaryLight"
+            android:layout_weight="30"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="7dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Rows"
+            android:layout_weight="100"
+            android:gravity="center"
+            android:textColor="@color/textColor"/>
+
+        <Spinner
+            android:id="@+id/rows"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="70"
+            android:gravity="center"
+            android:textColor="@color/textColor" />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:text="Columns"
+            android:layout_weight="100"
+            android:gravity="center"
+            android:textColor="@color/textColor"/>
+
+        <Spinner
+            android:id="@+id/columns"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="70"
+            android:gravity="center"
+            android:textColor="@color/textColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="7dp">
+
+        <CheckBox
+            android:id="@+id/text_note"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="@string/default_button_text_note"
+            android:textColor="@color/textColor"/>
+
+        <CheckBox
+            android:id="@+id/voice_record"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="@string/default_button_voice"
+            android:textColor="@color/textColor"/>
+        <CheckBox
+            android:id="@+id/camera"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="@string/default_button_camera"
+            android:textColor="@color/textColor"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

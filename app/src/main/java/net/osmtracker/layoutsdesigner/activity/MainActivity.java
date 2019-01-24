@@ -1,8 +1,12 @@
 package net.osmtracker.layoutsdesigner.activity;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
+import android.view.PointerIcon;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,19 +41,22 @@ public class MainActivity extends AppCompatActivity
     private String[] names = new String[]{"Item 1", "Item 2", "Item 3"};
     private String[] descriptions = new String[]{"Description 1", "Description 2", "Description 3"};
 
+    Dialog preparationPopup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_create_new_layout);
+        preparationPopup = new Dialog(this);
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_create_new_layout);
+
         fab.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ServiceCast")
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view){
+                ShowPopup(fab);
             }
         });
 
@@ -80,6 +91,11 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+    }
+
+    public void ShowPopup(View v){
+        preparationPopup.setContentView(R.layout.preparation_popup);
+        preparationPopup.show();
     }
 
     @Override

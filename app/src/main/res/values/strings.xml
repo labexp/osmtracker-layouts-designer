@@ -16,4 +16,9 @@
     <!--Main Screen-->
     <string name="empty_list_layouts">You don\'t have layouts yet</string>
     <string name="menu_action_search">Search</string>
+
+    <!-- Preparation popup-->
+    <string name="default_button_camera">Camera</string>
+    <string name="default_button_voice">Voice record</string>
+    <string name="default_button_text_note">Text note</string>
 </resources>
