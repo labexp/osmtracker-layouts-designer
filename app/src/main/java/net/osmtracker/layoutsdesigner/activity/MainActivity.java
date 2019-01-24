@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity
         ArrayAdapter adapterRows = new ArrayAdapter<>(this,
                 R.layout.spinner_item, rowsCounter);
         adapterRows.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        rowsSpinner.setAdapter(adapterColumns);
+        rowsSpinner.setAdapter(adapterRows);
 
         rowsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
