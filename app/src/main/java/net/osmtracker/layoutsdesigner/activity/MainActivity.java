@@ -1,10 +1,13 @@
 package net.osmtracker.layoutsdesigner.activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.PointerIcon;
 import android.view.View;
@@ -56,7 +59,28 @@ public class MainActivity extends AppCompatActivity
             @SuppressLint("ServiceCast")
             @Override
             public void onClick(View view){
-                ShowPopup(fab);
+                LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupLayout = inflater.inflate(R.layout.preparation_popup, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+
+                //TODO: CHANGE STRINGS
+                builder.setTitle(R.string.preparing_pop_up_title)
+                        .setView(popupLayout)
+                        .setPositiveButton("accept", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //TODO: OPEN EDITOR
+                                Log.i("#", "TODO: OPEN EDITOR");
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        })
+                        .setCancelable(true)
+                        .create().show();
             }
         });
 

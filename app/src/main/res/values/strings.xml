@@ -18,6 +18,7 @@
     <string name="menu_action_search">Search</string>
 
     <!-- Preparation popup-->
+    <string name="preparing_pop_up_title">Preparing layout</string>
     <string name="default_button_camera">Camera</string>
     <string name="default_button_voice">Voice record</string>
     <string name="default_button_text_note">Text note</string>
