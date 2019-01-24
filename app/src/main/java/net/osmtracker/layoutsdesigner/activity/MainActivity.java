@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity
     private String contextTAG = OsmtrackerLayoutsDesigner.Preferences.TAG + ".MainActivity";
     private String storageDir;
 
-    Dialog preparationPopup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +69,7 @@ public class MainActivity extends AppCompatActivity
     private void setUpElemets(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        preparationPopup = new Dialog(this);
-
         fab = (FloatingActionButton) findViewById(R.id.fab_create_new_layout);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ServiceCast")
             @Override
