@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmtracker.layoutsdesigner.Editor;
 import net.osmtracker.layoutsdesigner.OsmtrackerLayoutsDesigner;
 import net.osmtracker.layoutsdesigner.R;
 import net.osmtracker.layoutsdesigner.utils.CheckPermissions;
@@ -146,8 +147,10 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //TODO: OPEN EDITOR
+                        //TODO: pass to Editor the length of the new layout
                         Log.i("#", "TODO: OPEN EDITOR");
+                        startActivity(new Intent(MainActivity.this, Editor.class));
+                        finish();
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
