@@ -29,7 +29,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmtracker.layoutsdesigner.Editor;
 import net.osmtracker.layoutsdesigner.OsmtrackerLayoutsDesigner;
 import net.osmtracker.layoutsdesigner.R;
 import net.osmtracker.layoutsdesigner.utils.CheckPermissions;

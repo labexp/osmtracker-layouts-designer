@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Editor"
+            android:name=".activity.Editor"
             android:label="@string/title_activity_editor"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
