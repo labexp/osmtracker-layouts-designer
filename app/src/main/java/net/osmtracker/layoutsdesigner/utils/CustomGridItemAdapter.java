@@ -1,6 +1,8 @@
 package net.osmtracker.layoutsdesigner.utils;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,13 +91,24 @@ public class CustomGridItemAdapter extends BaseAdapter {
         }
 
         LayoutButtonGridItem item = (LayoutButtonGridItem) getItem(position);
-
         //set the name and the icon in the current grid button
         holder.txtItemName.setText(item.getItemName());
-        if(item.getImagePath() != null) {
+
+        ConstraintLayout constraintLayout = (ConstraintLayout) convertView.findViewById(R.id.parent_item_layout);
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        if(item.getItemName().equals("") && item.getImagePath() == null){
+            constraintSet.connect(R.id.imv_item_grid_icon, ConstraintSet.BOTTOM, R.id.parent_item_layout, ConstraintSet.BOTTOM, 6);
+            constraintSet.applyTo(constraintLayout);
+            holder.txtItemName.setVisibility(View.INVISIBLE);
+            holder.imvItemIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add_circle));
+        }
+        else if(item.getImagePath() != null) {
             holder.imvItemIcon.setImageURI(item.getImagePath());
         }
         else{
+            constraintSet.connect(R.id.txt_item_grid_name, ConstraintSet.TOP, R.id.parent_item_layout, ConstraintSet.TOP, 8);
+            constraintSet.applyTo(constraintLayout);
             holder.imvItemIcon.setVisibility(View.INVISIBLE);
         }
 
