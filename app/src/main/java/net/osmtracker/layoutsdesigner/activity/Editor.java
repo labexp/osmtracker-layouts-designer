@@ -58,13 +58,16 @@ public class Editor extends AppCompatActivity {
             txtLayoutName = (TextView) findViewById(R.id.txt_layout_name);
             txtLayoutName.setText(layoutName);
 
+            boolean notesCheckbox = extras.getBoolean(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_NOTES, false);
+            boolean cameraCheckbox = extras.getBoolean(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_CAMERA, false);
+            boolean voiceRecorderCheckbox = extras.getBoolean(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_VOICE_RECORDER, false);
             gridItemsArray = new ArrayList<LayoutButtonGridItem>();
-
-            int totalItems = columnsNum * rownsNum;
+            int amountToSubstract = checkIfNeedsDefaultButtons(notesCheckbox, cameraCheckbox, voiceRecorderCheckbox);
+            int totalItems = (columnsNum * rownsNum) - amountToSubstract;
             //TODO: VERIFY IF THE DEFAULT BUTTONS ARE CHECKED AND CREATE THEM IN THE ARRAY
             //set the total items created by default in the array
             for(int i = 0; i < totalItems; i++){
-                gridItemsArray.add(new LayoutButtonGridItem("", null));
+                gridItemsArray.add(new LayoutButtonGridItem(""));
             }
 
             gvLayoutEditor = (GridView) findViewById(R.id.grid_view_editor);
@@ -85,6 +88,23 @@ public class Editor extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+    }
+
+    private int checkIfNeedsDefaultButtons(boolean notesCheckbox, boolean cameraCheckbox, boolean voiceRecorderCheckbox) {
+        int i = 0;
+        if(voiceRecorderCheckbox){
+            gridItemsArray.add(new LayoutButtonGridItem(getResources().getString(R.string.default_button_voice), getResources().getDrawable(R.drawable.voice_32x32)));
+            i++;
+        }
+        if(cameraCheckbox){
+            gridItemsArray.add(new LayoutButtonGridItem(getResources().getString(R.string.default_button_camera), getResources().getDrawable(R.drawable.camera_32x32)));
+            i++;
+        }
+        if(notesCheckbox){
+            gridItemsArray.add(new LayoutButtonGridItem(getString(R.string.default_button_text_note), getResources().getDrawable(R.drawable.text_32x32)));
+            i++;
+        }
+        return i;
     }
 
     @Override

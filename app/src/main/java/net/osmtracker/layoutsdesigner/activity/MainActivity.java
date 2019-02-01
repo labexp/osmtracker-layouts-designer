@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -141,6 +142,9 @@ public class MainActivity extends AppCompatActivity
         LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupLayout = inflater.inflate(R.layout.preparation_popup, null);
         final EditText txtLayoutName = (EditText) popupLayout.findViewById(R.id.layout_name);
+        final CheckBox cbxCamera = (CheckBox) popupLayout.findViewById(R.id.cbx_camera);
+        final CheckBox cbxVoiceRecorder = (CheckBox) popupLayout.findViewById(R.id.cbx_voice_record);
+        final CheckBox cbxNotes = (CheckBox) popupLayout.findViewById(R.id.cbx_text_note);
         setSpinners(popupLayout);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
@@ -154,6 +158,9 @@ public class MainActivity extends AppCompatActivity
                         intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_COLUMNS_NAME, numberColumns);
                         intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_ROWS_NAME, numberRows);
                         intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_NEW_LAYOUT_NAME, txtLayoutName.getText().toString());
+                        intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_CAMERA, cbxCamera.isChecked());
+                        intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_NOTES, cbxNotes.isChecked());
+                        intent.putExtra(OsmtrackerLayoutsDesigner.Preferences.EXTRA_CHECKBOX_VOICE_RECORDER, cbxVoiceRecorder.isChecked());
                         startActivity(intent);
                         finish();
                     }
@@ -194,8 +201,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-
 
         AppCompatSpinner rowsSpinner = (AppCompatSpinner) v.findViewById(R.id.spinner_rows);
         final String[] rowsCounter = {"1","2","3","4"};
@@ -325,7 +330,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_btn_action_home) {
-            // Handle the camera action
+            // Handle the cbx_camera action
         } else if (id == R.id.nav_btn_action_editor) {
             showPopup();
 

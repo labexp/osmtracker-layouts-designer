@@ -106,6 +106,9 @@ public class CustomGridItemAdapter extends BaseAdapter {
         else if(item.getImagePath() != null) {
             holder.imvItemIcon.setImageURI(item.getImagePath());
         }
+        else if(item.getDefaultIcon() != null){
+            holder.imvItemIcon.setImageDrawable(item.getDefaultIcon());
+        }
         else{
             constraintSet.connect(R.id.txt_item_grid_name, ConstraintSet.TOP, R.id.parent_item_layout, ConstraintSet.TOP, 8);
             constraintSet.applyTo(constraintLayout);
