@@ -12,13 +12,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,7 @@ public class Editor extends AppCompatActivity {
     private String layoutName;
     private Button btnCancel;
     private Button btnAccept;
+    private Uri currentUri;
 
     // Code returned by the startActivityForResult() to the onActionResult() method
     // Indicates that the user choose correctly to select an image from the gallery
@@ -105,7 +110,7 @@ public class Editor extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), R.string.can_not_edit_button_message, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        showPopUp();
+                        showPopUp(currentGridItem);
                     }
                     //Toast.makeText(getApplicationContext(), "You press " + position, Toast.LENGTH_SHORT).show();
                 }
@@ -180,17 +185,26 @@ public class Editor extends AppCompatActivity {
         return true;
     }
 
-    private void showPopUp(){
+    private void showPopUp(final LayoutButtonGridItem currentGridItem){
         LayoutInflater inflater = (LayoutInflater) getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         current_new_button_popup = inflater.inflate(R.layout.new_button_popup, null);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Editor.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+        final EditText buttonName = current_new_button_popup.findViewById(R.id.editTextButtonName);
+        final TextView imagePathTextView = current_new_button_popup.findViewById(R.id.url_text_view);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Editor.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         builder.setTitle(R.string.new_button_pop_up_title)
                 .setView(current_new_button_popup)
                 .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //
+
+                        currentGridItem.setItemName(buttonName.getText().toString());
+                        currentGridItem.setImagePath(imagePathTextView.getText().toString());
+                        currentGridItem.setImageURI(currentUri);
+
+                        gridAdapter.notifyDataSetChanged();
+                        gvLayoutEditor.setAdapter(gridAdapter);
 
                     }
                 })
@@ -199,9 +213,44 @@ public class Editor extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
                     }
-                })
-                .setCancelable(true)
-                .create().show();
+                });
+
+        final AlertDialog dialog = builder.create();
+        buttonName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Button btOk = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                if(charSequence.length() >=0) {
+                    try {
+
+                        if(charSequence.length() == 0){
+                            btOk.setEnabled(false);
+                        }
+                        else{
+                            btOk.setEnabled(true);
+                        }
+
+                    }catch (Exception e){
+                        Log.e(contextTag, "Error editing the button name");
+
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dialog.show();
+
+
+
     }
 
     // This method throws the intent to open the gallery so the user can choose an icon for the new button in the layout
@@ -226,7 +275,7 @@ public class Editor extends AppCompatActivity {
 
     // This method writes the image path on the pop up window and shows the icon selected by the user
     private void showPathAndIcon(Uri selectedImage){
-
+        currentUri = selectedImage;
         sample_url = (TextView)current_new_button_popup.findViewById(R.id.url_text_view);
         image_button = (ImageButton)current_new_button_popup.findViewById(R.id.imageButton);
 

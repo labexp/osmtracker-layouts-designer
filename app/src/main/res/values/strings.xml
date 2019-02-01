@@ -50,5 +50,6 @@
     <string name="icon">Choose icon:</string>
     <string name="button_name">Name</string>
     <string name="url_text">Image URL</string>
+    <string name="empty_button_name">The name of the button is empty</string>
 
 </resources>
