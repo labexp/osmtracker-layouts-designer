@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,8 @@ public class Editor extends AppCompatActivity {
     private int columnsNum = 0;
     private int rownsNum = 0;
     private String layoutName;
+    private Button btnCancel;
+    private Button btnAccept;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,22 @@ public class Editor extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You press " + position, Toast.LENGTH_SHORT).show();
                 }
             });
+
+            btnCancel = (Button) findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: SHOW A MESSAGE WITH AN ALERT
+                }
+            });
+            btnAccept = (Button) findViewById(R.id.btn_accept);
+            btnAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: SAVE THE LAYOUT
+                }
+            });
+
         }
         else{
             Toast.makeText(getApplicationContext(), R.string.editor_intent_extras_error, Toast.LENGTH_LONG).show();
