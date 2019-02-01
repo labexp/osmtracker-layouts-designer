@@ -43,6 +43,7 @@
     <string name="empty_layout_name">New Layout {0}</string>
     <string name="cancel_verification">Are you sure?</string>
     <string name="cancelling_creation">Cancelling the layout creation</string>
+    <string name="can_not_edit_button_message">You can not edit this button</string>
 
     <!--New button Pop Up-->
     <string name="new_button_pop_up_title">New Button</string>

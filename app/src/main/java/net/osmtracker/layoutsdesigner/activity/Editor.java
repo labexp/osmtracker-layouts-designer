@@ -99,7 +99,14 @@ public class Editor extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //TODO: MAKES THE FUNCTIONALITY TO OPEN THE POP UP AND SET NAME AND ICON TO THE ITEM
-                    showPopUp();
+                    LayoutButtonGridItem currentGridItem =  gridItemsArray.get(position);
+                    if (currentGridItem.getDefaultIcon() != null){
+                        //The selected button is an default button chosen before the editor activity was open, the user can't edit this button
+                        Toast.makeText(getApplicationContext(), R.string.can_not_edit_button_message, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        showPopUp();
+                    }
                     //Toast.makeText(getApplicationContext(), "You press " + position, Toast.LENGTH_SHORT).show();
                 }
             });
