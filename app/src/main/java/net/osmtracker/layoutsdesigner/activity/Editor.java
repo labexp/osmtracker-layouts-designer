@@ -108,7 +108,23 @@ public class Editor extends AppCompatActivity {
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO: SHOW A MESSAGE WITH AN ALERT
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Editor.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+                    builder.setTitle(R.string.cancelling_creation)
+                            .setMessage(R.string.cancel_verification)
+                            .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    onBackPressed();
+                                }
+                            })
+                            .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            })
+                    .setCancelable(true)
+                    .create().show();
                 }
             });
             btnAccept = (Button) findViewById(R.id.btn_accept);
