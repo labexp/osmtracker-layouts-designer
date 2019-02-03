@@ -31,7 +31,9 @@ import net.osmtracker.layoutsdesigner.R;
 import net.osmtracker.layoutsdesigner.activity.MainActivity;
 import net.osmtracker.layoutsdesigner.utils.CustomGridItemAdapter;
 import net.osmtracker.layoutsdesigner.utils.LayoutButtonGridItem;
+import net.osmtracker.layoutsdesigner.utils.XMLGenerator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -144,6 +146,14 @@ public class Editor extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO: SAVE THE LAYOUT
+
+                    try {
+                        XMLGenerator.generateXML(Editor.this, gridItemsArray, "Tst");
+                        Log.e("#", "XML GENERADO");
+                    } catch (IOException e) {
+                        Log.e("#", "NO SE PUDO CREAR EL XML");
+                        e.printStackTrace();
+                    }
                 }
             });
 

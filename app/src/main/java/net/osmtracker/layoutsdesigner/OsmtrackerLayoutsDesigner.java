@@ -17,6 +17,7 @@ public class OsmtrackerLayoutsDesigner {
         public final static String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
         //Default
+        public final static String XML_EXTENSION = ".xml";
         public final static String VAL_STORAGE_DIR = "/osmtracker";
         public static final String LAYOUTS_SUBDIR = "layouts";
         public static final String LAYOUT_FILE_EXTENSION = ".xml";
