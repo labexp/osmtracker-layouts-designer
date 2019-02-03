@@ -192,6 +192,8 @@ public class Editor extends AppCompatActivity {
         final EditText buttonName = current_new_button_popup.findViewById(R.id.editTextButtonName);
         final TextView imagePathTextView = current_new_button_popup.findViewById(R.id.url_text_view);
 
+        image_button = (ImageButton)current_new_button_popup.findViewById(R.id.imageButton);
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(Editor.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         builder.setTitle(R.string.new_button_pop_up_title)
                 .setView(current_new_button_popup)
@@ -199,12 +201,19 @@ public class Editor extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        currentGridItem.setItemName(buttonName.getText().toString());
-                        currentGridItem.setImagePath(imagePathTextView.getText().toString());
-                        currentGridItem.setImageURI(currentUri);
+                        //Checking if the user changed the name or the image of the item
+                        if( !currentGridItem.getItemName().equals(buttonName.getText().toString()) || currentGridItem.getImagePath() != imagePathTextView.getText().toString()) {
 
-                        gridAdapter.notifyDataSetChanged();
-                        gvLayoutEditor.setAdapter(gridAdapter);
+                            Log.e("#", "Current name: "+ currentGridItem.getItemName() + " nombre en el edit text: "+ buttonName.getText().toString());
+                            currentGridItem.setItemName(buttonName.getText().toString());
+                            currentGridItem.setImagePath(imagePathTextView.getText().toString());
+                            currentGridItem.setImageURI(currentUri);
+
+                            gridAdapter.notifyDataSetChanged();
+                            gvLayoutEditor.setAdapter(gridAdapter);
+                            currentUri = null;
+                        }
+
 
                     }
                 })
@@ -215,7 +224,19 @@ public class Editor extends AppCompatActivity {
                     }
                 });
 
+        //Check if the current gridItem has name or image, and setting the popup with that name/image
+        if(currentGridItem.getItemName() != "" || currentGridItem.getImageURI() != null){
+            buttonName.setText(currentGridItem.getItemName());
+            imagePathTextView.setText(currentGridItem.getImagePath());
+            image_button.setMaxWidth(100);
+            image_button.setMaxHeight(100);
+            image_button.setPadding(9,9,9,9);
+            image_button.setImageURI(currentGridItem.getImageURI());
+        }
+
         final AlertDialog dialog = builder.create();
+
+
         buttonName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -248,7 +269,6 @@ public class Editor extends AppCompatActivity {
             }
         });
         dialog.show();
-
 
 
     }
