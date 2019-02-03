@@ -148,7 +148,7 @@ public class Editor extends AppCompatActivity {
                     //TODO: SAVE THE LAYOUT
 
                     try {
-                        XMLGenerator.generateXML(Editor.this, gridItemsArray, "Tst");
+                        XMLGenerator.generateXML(Editor.this, gridItemsArray, layoutName,rownsNum,columnsNum);
                         Log.e("#", "XML GENERADO");
                     } catch (IOException e) {
                         Log.e("#", "NO SE PUDO CREAR EL XML");
