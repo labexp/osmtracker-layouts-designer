@@ -153,9 +153,19 @@ public class Editor extends AppCompatActivity {
 
                     try {
                         XMLGenerator.generateXML(Editor.this, gridItemsArray, layoutName,rownsNum,columnsNum);
-                        Log.e("#", "XML GENERADO");
-                    } catch (IOException e) {
-                        Log.e("#", "NO SE PUDO CREAR EL XML");
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Editor.this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+                        builder.setTitle(R.string.succesfully_created_title)
+                                .setMessage(R.string.succesfully_created_message)
+                                .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        onBackPressed();
+                                    }
+                                })
+                                .create().show();
+                        } catch (IOException e) {
+                        Toast.makeText(Editor.this,R.string.error_creating_message, Toast.LENGTH_LONG);
                         e.printStackTrace();
                     }
                 }

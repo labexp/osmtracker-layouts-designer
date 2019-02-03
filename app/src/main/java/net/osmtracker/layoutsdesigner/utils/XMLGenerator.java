@@ -7,6 +7,7 @@ import android.util.Xml;
 import android.widget.Toast;
 
 import net.osmtracker.layoutsdesigner.OsmtrackerLayoutsDesigner;
+import net.osmtracker.layoutsdesigner.R;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -37,19 +38,67 @@ public class XMLGenerator {
         int index = 0;
 
         for (int i = 0; i < rows ; i++) {
-            serializer.startTag("","row");
-            for (int j = 0; j <columns ; j++) {
+            serializer.startTag("", "row");
+            for (int j = 0; j < columns; j++) {
                 LayoutButtonGridItem currentItem = gridItemsArray.get(index);
 
-                serializer.startTag("","button");
-                serializer.attribute("","type","tag");
-                serializer.attribute("","label",currentItem.getItemName());
-                serializer.attribute("","icon",currentItem.getImagePath());
-                serializer.endTag("","button");
+                serializer.startTag("", "button");
 
+                if (currentItem.getItemName() != null) {
+
+                    //VOICE RECORD
+                    if (currentItem.getItemName().equals(context.getResources().getString(R.string.default_button_voice))) {
+                        serializer.attribute("", "label", currentItem.getItemName());
+                        serializer.attribute("", "type", "voicerec");
+                        serializer.attribute("", "icon", OsmtrackerLayoutsDesigner.Preferences.VOICE_RECORD_ICON_PATH);
+                    }
+                    //TEXT NOTE
+                    else if (currentItem.getItemName().equals(context.getResources().getString(R.string.default_button_text_note))) {
+                        serializer.attribute("", "label", currentItem.getItemName());
+                        serializer.attribute("", "type", "textnote");
+                        serializer.attribute("", "icon", OsmtrackerLayoutsDesigner.Preferences.TEXT_NOTE_ICON_PATH);
+                    }
+                    //CAMERA
+                    else if (currentItem.getItemName().equals(context.getResources().getString(R.string.default_button_camera))) {
+                        serializer.attribute("", "label", currentItem.getItemName());
+                        serializer.attribute("", "type", "picture");
+                        serializer.attribute("", "icon", OsmtrackerLayoutsDesigner.Preferences.CAMERA_ICON_PATH);
+                    } else {
+                        //Checking if the button have icon
+                        if (currentItem.getImagePath() != null) {
+                            serializer.attribute("", "type", "tag");
+                            serializer.attribute("", "label", currentItem.getItemName());
+                            serializer.attribute("", "icon", currentItem.getImagePath().replace(OsmtrackerLayoutsDesigner.Preferences.USELESS_PATH_STRINGS,
+                                    OsmtrackerLayoutsDesigner.Preferences.EXIT_LAYOUT_DIR));
+                        }
+                        //The button doesn't have icon
+                        else {
+                            serializer.attribute("", "type", "tag");
+                            serializer.attribute("", "label", currentItem.getItemName());
+                        }
+                    }
+                }
+
+                //The button doesn't have have name
+                else {
+                    //Maybe the user only put an icon in the button
+                    if (currentItem.getImagePath() != null) {
+                        serializer.attribute("", "type", "tag");
+                        serializer.attribute("", "label", "-");
+                        serializer.attribute("", "icon", currentItem.getImagePath().replace(OsmtrackerLayoutsDesigner.Preferences.USELESS_PATH_STRINGS,
+                                OsmtrackerLayoutsDesigner.Preferences.EXIT_LAYOUT_DIR));
+                    }
+                    //The button information is empty
+                    else {
+                        serializer.attribute("", "type", "tag");
+                        serializer.attribute("", "label", "-");
+                    }
+
+                }
+                serializer.endTag("", "button");
                 index++;
             }
-            serializer.endTag("","row");
+            serializer.endTag("", "row");
         }
 
         serializer.endTag("", "layout");
@@ -63,8 +112,6 @@ public class XMLGenerator {
         createDir(path);
 
         writeToFile(context,path + layoutName, result);
-
-        Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
 
     }
 
