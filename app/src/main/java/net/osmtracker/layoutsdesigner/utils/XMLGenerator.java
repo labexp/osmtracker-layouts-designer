@@ -68,7 +68,7 @@ public class XMLGenerator {
                         if (currentItem.getImagePath() != null) {
                             serializer.attribute("", "type", "tag");
                             serializer.attribute("", "label", currentItem.getItemName());
-                            serializer.attribute("", "icon", currentItem.getImagePath().replace(OsmtrackerLayoutsDesigner.Preferences.USELESS_PATH_STRINGS,
+                            serializer.attribute("", "icon", currentItem.getImagePath().replace(Environment.getExternalStorageDirectory().toString(),
                                     OsmtrackerLayoutsDesigner.Preferences.EXIT_LAYOUT_DIR));
                         }
                         //The button doesn't have icon
@@ -85,7 +85,7 @@ public class XMLGenerator {
                     if (currentItem.getImagePath() != null) {
                         serializer.attribute("", "type", "tag");
                         serializer.attribute("", "label", "-");
-                        serializer.attribute("", "icon", currentItem.getImagePath().replace(OsmtrackerLayoutsDesigner.Preferences.USELESS_PATH_STRINGS,
+                        serializer.attribute("", "icon", currentItem.getImagePath().replace(Environment.getExternalStorageDirectory().toString(),
                                 OsmtrackerLayoutsDesigner.Preferences.EXIT_LAYOUT_DIR));
                     }
                     //The button information is empty
